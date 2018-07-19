@@ -1,0 +1,135 @@
+.chat {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.chat .chat-header {
+  height: 40px;
+  line-height: 40px;
+  background: #05c1ae;
+  text-align: center;
+}
+
+.chat .chat-content {
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #eee;
+  font-size: 12px;
+}
+
+.chat .chat-footer {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  bottom: 0;
+  border-top: solid 1px #ccc;
+  padding: 4px;
+  box-sizing: border-box;
+  background: #fff;
+}
+.chat .chat-footer table {
+  width: 100%;
+  height: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.chat .chat-footer .chat-input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border-bottom: solid 1px #ccc;
+}
+
+.chat .chat-footer .chat-input:focus {
+  border-bottom: solid 1px #05c1ae;
+}
+
+.msg-item {
+  padding: 10px 20px;
+}
+
+.msg-item.left {
+  text-align: left;
+}
+
+.msg-item.right {
+  text-align: right;
+}
+
+.msg-item-content {
+  text-align: left;
+  display: inline-block;
+  max-width: 76%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+.msg-item-content.left {
+  background: #fff;
+  color: #333;
+}
+
+.msg-item-content.right {
+  background: #05c1ae;
+  color: #fff;
+}
+
+.triangle {
+  position: relative;
+  z-index: 1;
+}
+
+.triangle::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-style: solid;
+  border: none;
+  border-radius: 2px;
+  -webkit-transform: skew(59deg, -31deg);
+  -moz-transform: skew(59deg, -31deg);
+  -ms-transform: skew(59deg, -31deg);
+  transform: skew(59deg, -31deg);
+  z-index: -1;
+}
+
+.triangle.left:after {
+  background: #fff;
+  left: 0px;
+  top: 11px;
+}
+
+.triangle.right:after {
+  background: #05c1ae;
+  right: 0px;
+  top: 8px;
+}
+
+.send-btn {
+  white-space: nowrap;
+  background: #05c1ae;
+  border-color: #05c1ae;
+  color: #fff;
+  border-radius: 6px;
+  outline: none;
+}
+
+.send-btn:focus {
+  border-color: #05cfae;
+  background: #05cfae;
+}

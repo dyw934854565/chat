@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+      }
+    }],
+    ["es2015", {
+        "loose": true
+    }],
+    "stage-2"
+  ],
+  "plugins": ["transform-runtime"]
+}
