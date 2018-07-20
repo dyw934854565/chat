@@ -87,6 +87,7 @@ var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 __webpack_require__(2);
+var _escape = __webpack_require__(7);
 var defaultOpts = {
   headerHeight: 40,
   el: document.body,
@@ -112,9 +113,9 @@ var defaultOpts = {
     this.run("scrollToBottom");
   },
   renderItem: function renderItem(msg, side) {
-    var msgEl = document.createElement('div');
+    var msgEl = document.createElement("div");
     msgEl.className = "msg-item " + side;
-    msgEl.innerHTML = "\n        <div class=\"msg-item-content triangle " + side + "\">" + msg + "</div>\n    ";
+    msgEl.innerHTML = "\n        <div class=\"msg-item-content triangle " + side + "\">" + this.escape(msg) + "</div>\n    ";
     this.body.appendChild(msgEl);
   },
   render: function render(msgs) {
@@ -218,6 +219,10 @@ var Chat = function () {
     this.run("render");
     this.run("bindEvents");
     this.run("afterRender");
+  };
+
+  Chat.prototype.escape = function escape(str) {
+    return _escape.call(null, str);
   };
 
   return Chat;
@@ -864,6 +869,44 @@ module.exports = function (css) {
 
 	// send back the fixed css
 	return fixedCss;
+};
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Implementation originally from Twitter's Hogan.js:
+// https://github.com/twitter/hogan.js/blob/master/lib/template.js#L325-L335
+
+var rAmp = /&/g;
+var rLt = /</g;
+var rApos =/\'/g;
+var rQuot = /\"/g;
+var hChars =/[&<>\"\']/;
+
+module.exports = function(str) {
+  if (str == null) {
+    return str;
+  }
+
+  if (typeof str !== "string") {
+    str = String(str);
+  }
+
+  if (hChars.test(String(str))) {
+    return str
+      .replace(rAmp,'&amp;')
+      .replace(rLt,'&lt;')
+      .replace(rApos,'&apos;')
+      .replace(rQuot, '&quot;');
+  }
+  else {
+    return str;
+  }
 };
 
 

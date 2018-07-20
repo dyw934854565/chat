@@ -1,4 +1,5 @@
 require('./index.css');
+const escape = require("html-escape");
 const defaultOpts = {
   headerHeight: 40,
   el: document.body,
@@ -33,10 +34,10 @@ const defaultOpts = {
     this.run("scrollToBottom");
   },
   renderItem(msg, side) {
-    const msgEl = document.createElement('div');
+    const msgEl = document.createElement("div");
     msgEl.className = `msg-item ${side}`;
     msgEl.innerHTML = `
-        <div class="msg-item-content triangle ${side}">${msg}</div>
+        <div class="msg-item-content triangle ${side}">${this.escape(msg)}</div>
     `;
     this.body.appendChild(msgEl);
   },
@@ -82,7 +83,7 @@ const defaultOpts = {
   scrollToBottom(el) {
     const body = el || this.body;
     body.scrollTop = body.scrollHeight;
-  }
+  },
 };
 const plugins = {};
 class Chat {
@@ -134,6 +135,9 @@ class Chat {
     this.run("render");
     this.run("bindEvents");
     this.run("afterRender");
+  }
+  escape (str) {
+    return escape.call(null, str);
   }
 }
 module.exports = Chat;
