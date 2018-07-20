@@ -107,8 +107,15 @@ var defaultOpts = {
   renderFooter: function renderFooter() {
     return "\n      <table>\n        <tr>\n          <td style=\"width: 100%;\"><input class=\"chat-input\" placeholder=\"" + this.run("placeholder") + "\" autocomplete=\"off\" autofocus=\"on\"></input></td>\n          <td><button class=\"send-btn\">\u53D1\u9001</button></td>\n        </tr>\n      </table>\n    ";
   },
+  onRecvMsg: function onRecvMsg(msg) {
+    this.run("renderItem", msg, "left");
+    this.run("scrollToBottom");
+  },
   renderItem: function renderItem(msg, side) {
-    $(this.run("el")).find(".chat-content").append("\n      <div class=\"msg-item " + side + "\">\n        <div class=\"msg-item-content triangle " + side + "\">" + msg + "</div>\n      </div>\n    ");
+    var msgEl = document.createElement('div');
+    msgEl.className = "msg-item " + side;
+    msgEl.innerHTML = "\n        <div class=\"msg-item-content triangle " + side + "\">" + msg + "</div>\n    ";
+    this.body.appendChild(msgEl);
   },
   render: function render(msgs) {
     this.run("getElement", "el").innerHTML = "\n      <div class=\"chat\">\n        <div class=\"chat-header\">\n          " + this.run("renderHeader") + "\n        </div>\n        <div class=\"chat-content\">\n        </div>\n        <div class=\"chat-footer\">\n          " + this.run("renderFooter") + "\n        </div>\n      <div>\n    ";
@@ -207,7 +214,7 @@ var Chat = function () {
   };
 
   Chat.prototype.init = function init() {
-    this.run("beforeInit");
+    this.run("beforeRender");
     this.run("render");
     this.run("bindEvents");
     this.run("afterRender");

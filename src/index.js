@@ -28,12 +28,17 @@ const defaultOpts = {
       </table>
     `;
   },
+  onRecvMsg(msg) {
+    this.run("renderItem", msg, "left");
+    this.run("scrollToBottom");
+  },
   renderItem(msg, side) {
-    $(this.run("el")).find(".chat-content").append(`
-      <div class="msg-item ${side}">
+    const msgEl = document.createElement('div');
+    msgEl.className = `msg-item ${side}`;
+    msgEl.innerHTML = `
         <div class="msg-item-content triangle ${side}">${msg}</div>
-      </div>
-    `);
+    `;
+    this.body.appendChild(msgEl);
   },
   render(msgs) {
     this.run("getElement", "el").innerHTML = `
@@ -125,12 +130,10 @@ class Chat {
     return fn;
   }
   init () {
-    this.run("beforeInit");
+    this.run("beforeRender");
     this.run("render");
     this.run("bindEvents");
     this.run("afterRender");
   }
 }
-
-
 module.exports = Chat;
