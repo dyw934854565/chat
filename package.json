@@ -1,5 +1,5 @@
 {
-  "name": "chat",
+  "name": "chat-box",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "start": "webpack -w",
     "server": "node server.js"
   },
-  "author": "",
+  "author": "duanyuwen [dyw934854565@sina.com]",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
