@@ -33,12 +33,15 @@ const defaultOpts = {
     this.run("renderItem", msg, "left");
     this.run("scrollToBottom");
   },
+  makeItemHtml(msg, side) {
+    return `
+        <div class="msg-item-content triangle ${side}">${msg.html || this.escape(msg)}</div>
+    `;
+  },
   renderItem(msg, side) {
     const msgEl = document.createElement("div");
     msgEl.className = `msg-item ${side}`;
-    msgEl.innerHTML = `
-        <div class="msg-item-content triangle ${side}">${this.escape(msg)}</div>
-    `;
+    msgEl.innerHTML = this.makeItemHtml(msg, side);
     this.body.appendChild(msgEl);
   },
   render(msgs) {
