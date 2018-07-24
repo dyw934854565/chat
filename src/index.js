@@ -41,7 +41,7 @@ const defaultOpts = {
   renderItem(msg, side) {
     const msgEl = document.createElement("div");
     msgEl.className = `msg-item ${side}`;
-    msgEl.innerHTML = this.makeItemHtml(msg, side);
+    msgEl.innerHTML = this.run('makeItemHtml', msg, side);
     this.body.appendChild(msgEl);
   },
   render(msgs) {

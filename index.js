@@ -118,7 +118,7 @@ var defaultOpts = {
   renderItem: function renderItem(msg, side) {
     var msgEl = document.createElement("div");
     msgEl.className = "msg-item " + side;
-    msgEl.innerHTML = this.makeItemHtml(msg, side);
+    msgEl.innerHTML = this.run('makeItemHtml', msg, side);
     this.body.appendChild(msgEl);
   },
   render: function render(msgs) {
