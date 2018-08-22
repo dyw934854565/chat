@@ -138,6 +138,7 @@ class Chat {
     this.run("render");
     this.run("bindEvents");
     this.run("afterRender");
+    return this;
   }
   escape (str) {
     return escape.call(null, str);

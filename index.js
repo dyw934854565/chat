@@ -222,6 +222,7 @@ var Chat = function () {
     this.run("render");
     this.run("bindEvents");
     this.run("afterRender");
+    return this;
   };
 
   Chat.prototype.escape = function escape(str) {
