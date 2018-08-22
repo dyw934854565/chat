@@ -32,6 +32,7 @@ new Chat({
 ```
 npm run server
 ```
+访问http://localhost:3000/demo
 
 # script  暂时没有cdn，可以下载下来
 
