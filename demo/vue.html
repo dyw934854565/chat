@@ -45,7 +45,7 @@
 
 <body>
   <div class="app phone">
-    <Chat @send="sendFn" ref="chat">
+    <Chat @send="sendFn" :config="config" ref="chat">
     </Chat>
   </div>
   <script src="../dist/vue.js"></script>
@@ -54,6 +54,13 @@
     Vue.component('scroll-view', Chat.scrollView);
     // new Vue({
     //   el: '.app',
+    // data() {
+    //   return {
+    //     config: {
+    //       showHeader: true,
+    //     }
+    //   }
+    // },
     //   components: {
     //     Chat: Chat.Chat,
     //   },
@@ -73,6 +80,13 @@
     // })
     new Vue({
       el: '.app',
+      data() {
+        return {
+          config: {
+            showHeader: false,
+          }
+        }
+      },
       components: {
         Chat: Chat.Chat,
       },

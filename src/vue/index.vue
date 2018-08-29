@@ -1,11 +1,11 @@
 <template>
   <div class="chat">
-    <div class="chat-header">
+    <div class="chat-header" v-if="mergedConfig.showHeader">
       <slot name="header">
         {{mergedConfig.title}}
       </slot>
     </div>
-    <scroll-view class="chat-content" :scroll-y="true" :scroll-top="scrollTop" :scroll-into-view="`dialog_${messageList.length - 1}`">
+    <scroll-view :style="style" class="chat-content" :scroll-y="true" :scroll-top="scrollTop" :scroll-into-view="`dialog_${messageList.length - 1}`">
       <component :id="`dialog_${index}`" v-for="(message, index) in messageList" :key="index" :is="message.component || 'dialog-item'" :side="message.side" :data="message.data"></component>
     </scroll-view>
     <div class="chat-footer">
@@ -29,6 +29,7 @@ import dialogItem from './dialog-item.vue';
 const defaultConfig = {
   title: '聊天',
   placeholder: "你说，我听",
+  showHeader: true,
 }
 export default {
   props: {
@@ -66,6 +67,12 @@ export default {
     },
   },
   computed: {
+    style() {
+      if (this.mergedConfig.showHeader) {
+        return '';
+      }
+      return 'top: 0px;';
+    },
     mergedConfig() {
       return Object.assign({}, defaultConfig, this.config);
     }

@@ -1364,7 +1364,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var defaultConfig = {
   title: '聊天',
-  placeholder: "你说，我听"
+  placeholder: "你说，我听",
+  showHeader: true
 };
 exports.default = {
   props: {
@@ -1405,6 +1406,12 @@ exports.default = {
     }
   },
   computed: {
+    style: function style() {
+      if (this.mergedConfig.showHeader) {
+        return '';
+      }
+      return 'top: 0px;';
+    },
     mergedConfig: function mergedConfig() {
       return (0, _assign2.default)({}, defaultConfig, this.config);
     }
@@ -1711,21 +1718,24 @@ var render = function() {
     "div",
     { staticClass: "chat" },
     [
-      _c(
-        "div",
-        { staticClass: "chat-header" },
-        [
-          _vm._t("header", [
-            _vm._v("\n      " + _vm._s(_vm.mergedConfig.title) + "\n    ")
-          ])
-        ],
-        2
-      ),
+      _vm.mergedConfig.showHeader
+        ? _c(
+            "div",
+            { staticClass: "chat-header" },
+            [
+              _vm._t("header", [
+                _vm._v("\n      " + _vm._s(_vm.mergedConfig.title) + "\n    ")
+              ])
+            ],
+            2
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "scroll-view",
         {
           staticClass: "chat-content",
+          style: _vm.style,
           attrs: {
             "scroll-y": true,
             "scroll-top": _vm.scrollTop,
