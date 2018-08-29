@@ -53,14 +53,20 @@
       el: '.phone',
       title: '聊天',
       afterRender() {
-        this.run('onRecvMsg', '你好， 很高兴认识你');
+        this.ws = new WebSocket("ws://localhost:8080");
+        this.ws.onmessage = (msg) => {
+          console.log(msg)
+          this.run("onRecvMsg", msg.data);
+        };
+        this.ws.onclose = () => {
+          this.run("onRecvMsg", "已断开连接");
+        }
       },
       send(msg) {
         this.run('renderItem', msg, 'right');
-        // send msg
-        this.run('onRecvMsg', '机器人自动回复：' + Math.random().toFixed(2) * 100);
+        this.ws.send(msg);
       },
-      }).init();
+    }).init();
   </script>
 </body>
 

@@ -7,8 +7,8 @@ const defaultOpts = {
   sendBtn: ".send-btn",
   body: ".chat-content",
   placeholder: "你说，我听",
-  getElement(key) {
-    const el = this.run(key);
+  getElement(elKey) {
+    const el = this.run(elKey);
     if (typeof el === "string") {
       return document.querySelector(el);
     }
@@ -88,25 +88,9 @@ const defaultOpts = {
     body.scrollTop = body.scrollHeight;
   },
 };
-const plugins = {};
 class Chat {
   constructor (opts = {}) {
-    this.opts = opts;
-  }
-  registerPlugin (plugin, name) {
-    if (!plugin) return false;
-    if (!name && !plugin.name) return false;
-    if (!name) {
-      name = plugin.name;
-    }
-    plugins[name] = plugin;
-    return true;
-  }
-  getPlugin (plugin) {
-    if (typeof plugin === "string") {
-      return plugins[plugin] || {};
-    }
-    return plugin || {};
+    this.opts = Object.assign({}, defaultOpts, opts);
   }
   config (key = '', val) {
     if (!key || typeof key != 'string') return;
@@ -114,14 +98,7 @@ class Chat {
       this.opts[key] = val;
       return;
     }
-    const checkList = [this.opts, this.getPlugin(this.opts.plugin), defaultOpts];
-    for (let i = 0; i < checkList.length; i++) {
-      const item = checkList[i];
-      if (item && item[key] !== undefined) {
-        return item[key];
-      }
-    };
-    return;
+    return this.opts[key];
   }
   run (key, ...rest) {
     if (typeof key === "function") {

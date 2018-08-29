@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>聊天</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .phone {
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    @media screen and (min-width: 800px) {
+      .phone {
+        width: 368px;
+        height: 741px;
+        background-image: url(./iphone.png);
+        background-size: cover;
+        padding: 83px 24px 105px;
+      }
+      .phone::before {
+        content: "";
+        display: block;
+        height: 10px;
+        background-color: #05c1ae;
+        background-image: url(./ios-statusbar.png);
+        background-size: contain;
+        padding: 5px 0 0;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app phone">
+    <Chat @send="sendFn" ref="chat">
+    </Chat>
+  </div>
+  <script src="../dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component('scroll-view', Chat.scrollView);
+    // new Vue({
+    //   el: '.app',
+    //   components: {
+    //     Chat: Chat.Chat,
+    //   },
+    //   methods: {
+    //     sendFn (msg) {
+    //       this.$refs.chat.onSendMessage(msg);
+
+    //       // ajax,
+    //       console.log('send', msg);
+
+    //       this.$refs.chat.onRecvMessage('机器人自动回复：' + Math.random().toFixed(2) * 100);
+    //     }
+    //   },
+    //   mounted () {
+    //     this.$refs.chat.onRecvMessage('你好， 欢迎你哇');
+    //   }
+    // })
+    new Vue({
+      el: '.app',
+      components: {
+        Chat: Chat.Chat,
+      },
+      created () {
+        this.ws = new WebSocket("ws://localhost:8080");
+      },
+      methods: {
+        sendFn (msg) {
+          this.$refs.chat.onSendMessage(msg);
+
+          // send
+          this.ws.send(msg);
+        }
+      },
+      mounted () {
+        this.ws.onmessage = (msg) => {
+          console.log(msg)
+          this.$refs.chat.onRecvMessage(msg.data);
+        };
+        this.ws.onclose = () => {
+          this.$refs.chat.onRecvMessage("已断开连接");
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
