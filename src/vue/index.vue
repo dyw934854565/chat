@@ -5,7 +5,7 @@
         {{mergedConfig.title}}
       </slot>
     </div>
-    <scroll-view :style="style" class="chat-content" :scroll-y="true" :scroll-into-view="lastId">
+    <scroll-view :style="style" class="chat-content" :enable-back-to-top="true" :scroll-y="true" :scroll-into-view="lastId">
       <slot>
         <component :index="index" :id="'dialog_' + index" v-for="(message, index) in messageList" :key="index" :is="message.component || 'dialog-item'" :side="message.side" :data="message.data"></component>
       </slot>
@@ -15,7 +15,7 @@
         <table>
           <tr>
             <td style="width: 100%;">
-              <input class="chat-input" v-model="value" @keydown.enter="send" :placeholder="mergedConfig.placeholder" autocomplete="off" autofocus="on" />
+              <input class="chat-input" v-model="value" @focus="scrollToBottom" @keydown.enter="send" :placeholder="mergedConfig.placeholder" autocomplete="off" autofocus="on" />
             </td>
             <td><button @click="send" class="send-btn">发送</button></td>
           </tr>
@@ -54,6 +54,7 @@
         }
         this.messageList.push({ ...msg, side: 'left' })
         this.msgChange()
+        this.scrollToBottom()
       },
       onSendMessage (msg) {
         if (typeof msg === 'string') {
@@ -61,6 +62,7 @@
         }
         this.messageList.push({ ...msg, side: 'right' })
         this.msgChange()
+        this.scrollToBottom()
       },
       send () {
         if (!this.value) {

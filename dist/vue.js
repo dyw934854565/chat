@@ -1494,6 +1494,7 @@ exports.default = {
       }
       this.messageList.push((0, _extends3.default)({}, msg, { side: 'left' }));
       this.msgChange();
+      this.scrollToBottom();
     },
     onSendMessage: function onSendMessage(msg) {
       if (typeof msg === 'string') {
@@ -1501,6 +1502,7 @@ exports.default = {
       }
       this.messageList.push((0, _extends3.default)({}, msg, { side: 'right' }));
       this.msgChange();
+      this.scrollToBottom();
     },
     send: function send() {
       if (!this.value) {
@@ -1812,7 +1814,11 @@ var render = function() {
         {
           staticClass: "chat-content",
           style: _vm.style,
-          attrs: { "scroll-y": true, "scroll-into-view": _vm.lastId }
+          attrs: {
+            "enable-back-to-top": true,
+            "scroll-y": true,
+            "scroll-into-view": _vm.lastId
+          }
         },
         [
           _vm._t(
@@ -1859,6 +1865,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.value },
                     on: {
+                      focus: _vm.scrollToBottom,
                       keydown: function($event) {
                         if (
                           !("button" in $event) &&
