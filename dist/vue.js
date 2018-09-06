@@ -1661,7 +1661,7 @@ var _htmlEscape2 = _interopRequireDefault(_htmlEscape);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  props: ['side', 'data', 'index'],
+  props: ['side', 'data', 'index', 'id'],
   computed: {
     msg: function msg() {
       return (0, _htmlEscape2.default)(this.data || '');
@@ -1999,7 +1999,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { class: ["msg-item", _vm.side] }, [
+  return _c("div", { class: ["msg-item", _vm.side], attrs: { id: _vm.id } }, [
     _c(
       "div",
       { class: ["msg-item-content", "triangle", _vm.side] },
