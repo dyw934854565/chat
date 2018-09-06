@@ -5,7 +5,7 @@
         {{mergedConfig.title}}
       </slot>
     </div>
-    <scroll-view :style="style" class="chat-content" :scroll-y="true" :scroll-top="scrollTop" :scroll-into-view="lastId">
+    <scroll-view :style="style" class="chat-content" :scroll-y="true" :scroll-into-view="lastId">
       <slot>
         <component :index="index" :id="'dialog_' + index" v-for="(message, index) in messageList" :key="index" :is="message.component || 'dialog-item'" :side="message.side" :data="message.data"></component>
       </slot>
@@ -43,8 +43,8 @@
     data () {
       return {
         value: '',
-        scrollTop: 0,
-        messageList: []
+        messageList: [],
+        lastId: ''
       }
     },
     methods: {
@@ -83,6 +83,19 @@
       setMessages (messageList) {
         this.messageList = messageList
         this.msgChange()
+      },
+      scrollToBottom () {
+        this.$nextTick(() => {
+          this.lastId = `dialog_${this.messageList.length - 1}`
+        })
+      },
+      scrollTo (index) {
+        if (typeof index !== 'number' || !this.messageList[index]) {
+          return
+        }
+        this.$nextTick(() => {
+          this.lastId = `dialog_${index}`
+        })
       }
     },
     computed: {
@@ -94,9 +107,6 @@
       },
       mergedConfig () {
         return Object.assign({}, defaultConfig, this.config)
-      },
-      lastId () {
-        return `dialog_${this.messageList.length - 1}`
       }
     },
     components: {

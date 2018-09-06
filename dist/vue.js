@@ -1482,8 +1482,8 @@ exports.default = {
   data: function data() {
     return {
       value: '',
-      scrollTop: 0,
-      messageList: []
+      messageList: [],
+      lastId: ''
     };
   },
 
@@ -1523,6 +1523,23 @@ exports.default = {
     setMessages: function setMessages(messageList) {
       this.messageList = messageList;
       this.msgChange();
+    },
+    scrollToBottom: function scrollToBottom() {
+      var _this = this;
+
+      this.$nextTick(function () {
+        _this.lastId = 'dialog_' + (_this.messageList.length - 1);
+      });
+    },
+    scrollTo: function scrollTo(index) {
+      var _this2 = this;
+
+      if (typeof index !== 'number' || !this.messageList[index]) {
+        return;
+      }
+      this.$nextTick(function () {
+        _this2.lastId = 'dialog_' + index;
+      });
     }
   },
   computed: {
@@ -1534,9 +1551,6 @@ exports.default = {
     },
     mergedConfig: function mergedConfig() {
       return (0, _assign2.default)({}, defaultConfig, this.config);
-    },
-    lastId: function lastId() {
-      return 'dialog_' + (this.messageList.length - 1);
     }
   },
   components: {
@@ -1798,11 +1812,7 @@ var render = function() {
         {
           staticClass: "chat-content",
           style: _vm.style,
-          attrs: {
-            "scroll-y": true,
-            "scroll-top": _vm.scrollTop,
-            "scroll-into-view": _vm.lastId
-          }
+          attrs: { "scroll-y": true, "scroll-into-view": _vm.lastId }
         },
         [
           _vm._t(
