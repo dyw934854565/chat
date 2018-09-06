@@ -5,7 +5,7 @@
         {{mergedConfig.title}}
       </slot>
     </div>
-    <scroll-view :style="style" class="chat-content" :enable-back-to-top="true" :scroll-y="true" :scroll-into-view="lastId">
+    <scroll-view @scroll="scroll" :style="style" class="chat-content" :enable-back-to-top="true" :scroll-y="true" :scroll-into-view="lastId">
       <slot>
         <component :index="index" :id="'dialog_' + index" v-for="(message, index) in messageList" :key="index" :is="message.component || 'dialog-item'" :side="message.side" :data="message.data"></component>
       </slot>
@@ -15,7 +15,7 @@
         <table>
           <tr>
             <td style="width: 100%;">
-              <input class="chat-input" v-model="value" @focus="scrollToBottom" @keydown.enter="send" :placeholder="mergedConfig.placeholder" autocomplete="off" autofocus="on" />
+              <input class="chat-input" v-model="value" @focus="inputFocus" @keydown.enter="send" :placeholder="mergedConfig.placeholder" autocomplete="off" autofocus="on" />
             </td>
             <td><button @click="send" class="send-btn">发送</button></td>
           </tr>
@@ -48,21 +48,21 @@
       }
     },
     methods: {
-      onRecvMessage (msg) {
+      onRecvMessage (msg, toBottom = true) {
         if (typeof msg === 'string') {
           msg = { data: msg }
         }
         this.messageList.push({ ...msg, side: 'left' })
         this.msgChange()
-        this.scrollToBottom()
+        toBottom && this.scrollToBottom()
       },
-      onSendMessage (msg) {
+      onSendMessage (msg, toBottom = true) {
         if (typeof msg === 'string') {
           msg = { data: msg }
         }
         this.messageList.push({ ...msg, side: 'right' })
         this.msgChange()
-        this.scrollToBottom()
+        toBottom && this.scrollToBottom()
       },
       send () {
         if (!this.value) {
@@ -86,18 +86,34 @@
         this.messageList = messageList
         this.msgChange()
       },
-      scrollToBottom () {
+      scrollToBottom (nextTick = true) {
+        if (!nextTick) {
+          this.lastId = `dialog_${this.messageList.length - 1}`
+          return
+        }
         this.$nextTick(() => {
           this.lastId = `dialog_${this.messageList.length - 1}`
         })
       },
-      scrollTo (index) {
+      scrollTo (index, nextTick = true) {
         if (typeof index !== 'number' || !this.messageList[index]) {
+          return
+        }
+        if (!nextTick) {
+          this.lastId = `dialog_${index}`
           return
         }
         this.$nextTick(() => {
           this.lastId = `dialog_${index}`
         })
+      },
+      inputFocus () {
+        this.scrollToBottom(false)
+      },
+      scroll () {
+        console.log('scroll')
+
+        this.lastId = ''
       }
     },
     computed: {

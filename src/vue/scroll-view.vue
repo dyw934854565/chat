@@ -9,12 +9,19 @@
     props: ['scroll-top', 'scroll-into-view'],
     created () {
       this.$watch('scrollIntoView', () => {
+        if (!this['scrollIntoView']) {
+          return
+        }
         console.log(this['scrollIntoView'])
         this.$nextTick(() => {
-          document
-            .querySelectorAll(`#${this['scrollIntoView']}`)[0]
-            .scrollIntoView()
+          const el = document.querySelector(`#${this['scrollIntoView']}`)
+          el && el.scrollIntoView()
         })
+      })
+    },
+    mounted () {
+      document.querySelector('.chat-content').addEventListener('scroll', (e) => {
+        this.$emit('scroll', e)
       })
     }
   }

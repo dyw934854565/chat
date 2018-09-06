@@ -1489,20 +1489,24 @@ exports.default = {
 
   methods: {
     onRecvMessage: function onRecvMessage(msg) {
+      var toBottom = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
       if (typeof msg === 'string') {
         msg = { data: msg };
       }
       this.messageList.push((0, _extends3.default)({}, msg, { side: 'left' }));
       this.msgChange();
-      this.scrollToBottom();
+      toBottom && this.scrollToBottom();
     },
     onSendMessage: function onSendMessage(msg) {
+      var toBottom = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
       if (typeof msg === 'string') {
         msg = { data: msg };
       }
       this.messageList.push((0, _extends3.default)({}, msg, { side: 'right' }));
       this.msgChange();
-      this.scrollToBottom();
+      toBottom && this.scrollToBottom();
     },
     send: function send() {
       if (!this.value) {
@@ -1529,6 +1533,12 @@ exports.default = {
     scrollToBottom: function scrollToBottom() {
       var _this = this;
 
+      var nextTick = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (!nextTick) {
+        this.lastId = 'dialog_' + (this.messageList.length - 1);
+        return;
+      }
       this.$nextTick(function () {
         _this.lastId = 'dialog_' + (_this.messageList.length - 1);
       });
@@ -1536,12 +1546,26 @@ exports.default = {
     scrollTo: function scrollTo(index) {
       var _this2 = this;
 
+      var nextTick = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
       if (typeof index !== 'number' || !this.messageList[index]) {
+        return;
+      }
+      if (!nextTick) {
+        this.lastId = 'dialog_' + index;
         return;
       }
       this.$nextTick(function () {
         _this2.lastId = 'dialog_' + index;
       });
+    },
+    inputFocus: function inputFocus() {
+      this.scrollToBottom(false);
+    },
+    scroll: function scroll() {
+      console.log('scroll');
+
+      this.lastId = '';
     }
   },
   computed: {
@@ -1684,10 +1708,21 @@ exports.default = {
     var _this = this;
 
     this.$watch('scrollIntoView', function () {
+      if (!_this['scrollIntoView']) {
+        return;
+      }
       console.log(_this['scrollIntoView']);
       _this.$nextTick(function () {
-        document.querySelectorAll('#' + _this['scrollIntoView'])[0].scrollIntoView();
+        var el = document.querySelector('#' + _this['scrollIntoView']);
+        el && el.scrollIntoView();
       });
+    });
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    document.querySelector('.chat-content').addEventListener('scroll', function (e) {
+      _this2.$emit('scroll', e);
     });
   }
 };
@@ -1818,7 +1853,8 @@ var render = function() {
             "enable-back-to-top": true,
             "scroll-y": true,
             "scroll-into-view": _vm.lastId
-          }
+          },
+          on: { scroll: _vm.scroll }
         },
         [
           _vm._t(
@@ -1865,7 +1901,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.value },
                     on: {
-                      focus: _vm.scrollToBottom,
+                      focus: _vm.inputFocus,
                       keydown: function($event) {
                         if (
                           !("button" in $event) &&
