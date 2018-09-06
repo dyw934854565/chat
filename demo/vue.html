@@ -51,6 +51,8 @@
   <script src="../dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
+    console.log(Chat);
+
     Vue.component('scroll-view', Chat.scrollView);
     // new Vue({
     //   el: '.app',
@@ -96,7 +98,6 @@
       methods: {
         sendFn (msg) {
           this.$refs.chat.onSendMessage(msg);
-
           // send
           this.ws.send(msg);
         }

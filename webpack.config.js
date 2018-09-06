@@ -6,10 +6,10 @@ var VueLoaderPlugin = require("vue-loader/lib/plugin");
 var config = {
   entry: {
     index: "./src/index.js",
-    vue: "./src/vue.js",
+    vue: "./src/vue.js"
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, "dist"),
     filename: "[name].min.js",
     library: "Chat",
     libraryTarget: "umd",
