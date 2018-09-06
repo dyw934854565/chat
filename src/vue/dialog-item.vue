@@ -1,5 +1,5 @@
 <template>
-  <div :class="['msg-item', side]">
+  <div :class="['msg-item', side]" :id="id">
     <div :class="['msg-item-content', 'triangle', side]">
       <slot>{{msg}}</slot>
     </div>
@@ -9,7 +9,7 @@
 <script>
   import escape from 'html-escape'
   export default {
-    props: ['side', 'data', 'index'],
+    props: ['side', 'data', 'index', 'id'],
     computed: {
       msg () {
         return escape(this.data || '')
