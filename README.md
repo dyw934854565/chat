@@ -6,7 +6,7 @@
 by npm
 
 ```
-const Chat = import('chat-box-js');
+const Chat = require('chat-box-js');
 
 new Chat({
   el: '.phone',  // 挂载的dom， 聊天界面渲染在这个dom上，宽高都是100%
