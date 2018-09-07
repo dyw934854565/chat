@@ -1,7 +1,7 @@
 {
   "name": "chat-box-js",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "component to make chat box ",
   "main": "dist/index.js",
   "scripts": {
     "start": "webpack -w",
