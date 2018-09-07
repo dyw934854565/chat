@@ -11,7 +11,16 @@
     "dist",
     "src"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyw934854565/chat.git"
+  },
+  "homepage": "https://github.com/dyw934854565/chat#readme",
   "author": "duanyuwen [dyw934854565@sina.com]",
+  "keywords": [
+    "vue",
+    "chat-box"
+  ],
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
