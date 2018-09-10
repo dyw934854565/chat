@@ -53,7 +53,7 @@
       el: '.phone',
       title: '聊天',
       afterRender() {
-        this.ws = new WebSocket("ws://localhost:8424");
+        this.ws = new WebSocket("ws://10.24.109.100:8424");
         this.ws.onmessage = (msg) => {
           console.log(msg)
           this.run("onRecvMsg", msg.data);
