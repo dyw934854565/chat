@@ -12,7 +12,6 @@
         if (!this['scrollIntoView']) {
           return
         }
-        console.log(this['scrollIntoView'])
         this.$nextTick(() => {
           const el = document.querySelector(`#${this['scrollIntoView']}`)
           el && el.scrollIntoView()

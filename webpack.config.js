@@ -5,8 +5,8 @@ var VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 var config = {
   entry: {
-    index: "./src/index.js",
-    vue: "./src/vue.js"
+    chat_js: "./src/index.js",
+    chat_vue: "./src/vue.js"
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -24,8 +24,7 @@ var config = {
       },
       {
         test: /\.vue$/,
-        loader: "vue-loader",
-        options: {}
+        loader: "vue-loader"
       },
       {
         test: /\.css$/,
@@ -33,12 +32,13 @@ var config = {
       }
     ]
   },
-  devtool: "source-map",
+  devtool: "#source-map",
   plugins: [
     new VueLoaderPlugin(),
     new UnminifiedWebpackPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      minimize: true
+      minimize: true,
+      sourceMap: true
     })
   ]
 };
