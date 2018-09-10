@@ -87,7 +87,7 @@
     .dish {
       position: relative;
       float: left;
-      width: 25%;
+      width: 80px;
       box-shadow: #ddd 1px 1px 4px;
       overflow: hidden;
       background: #fff;
@@ -249,88 +249,71 @@
       };
   </script>
   <script>
-    function getNowFormatDate() {
-        var date = new Date();
-        var seperator1 = "-";
-        var seperator2 = ":";
-        var month = date.getMonth() + 1;
-        var strDate = date.getDate();
-        if (month >= 1 && month <= 9) {
-          month = "0" + month;
-        }
-        if (strDate >= 0 && strDate <= 9) {
-          strDate = "0" + strDate;
-        }
-        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-          + " " + date.getHours() + seperator2 + date.getMinutes()
-          + seperator2 + date.getSeconds();
-        return currentdate;
-      }
-      function renderDishes(dishes, colCount = 4) {
-        return Array.from({ length: Math.ceil(dishes.length / colCount) }).map((val, index) => {
-          const items = Array.from({ length: colCount }).map((val, i) => dishes[index * colCount + i]);
-          return `
-            <ul class="clearfix">
-              ${items.map(item => `
-                  <li class="dish">
-                    ${item ? `
-                      <div class="dish-img" style="background-image: url(${item.dish.picture || defaultImg});"></div>
-                      <div class="dish-info">
-                        <p class="dish-name">${item.dish.name}</p>
-                        <p>¥${item.dish.price || 12}</p>
-                      </div>
-                      <span class="my-badge">${item.count}</span>
-                    ` : ''}
-                  </li>
-              `).join('')}
-            </ul>
-          `;
-        }).join('');
-      }
-      new Chat({
-        el: '.phone',
-        title: '聊天',
-        placeholder: '你说，我听',
-        afterRender() {
-          this.run('onRecvMsg', '你好， 很高兴认识你');
-          this.run('onRecvMsg', {
-            type: 'cart',
-            data: cartData
-          })
-          this.run('onRecvMsg', {
-            type: 'img',
-            data: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536566141823&di=7f254a1f5cc22a8ffaa00dc9b53f2ed4&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201411%2F30%2F20141130052353_i4ekh.thumb.700_0.jpeg'
-          })
-        },
-        makeItemHtml(msg, side) {
-          if (typeof msg === 'string' || msg.html) {
-            return `
-              <div class="msg-item-content triangle ${side}">${msg.html || this.escape(msg)}</div>
-            `;
-          }
-          let html = '';
-          switch (msg.type) {
-            case 'cart':
-              html = `
-                <div class="msg-cart">
-                  ${renderDishes(msg.data.dishesList)}
+function renderDishes(dishes, colCount = 4) {
+  return Array.from({ length: Math.ceil(dishes.length / colCount) }).map((val, index) => {
+    const items = Array.from({ length: colCount }).map((val, i) => dishes[index * colCount + i]);
+    return `
+      <ul class="clearfix">
+        ${items.map(item => `
+            <li class="dish">
+              ${item ? `
+                <div class="dish-img" style="background-image: url(${item.dish.picture || defaultImg});"></div>
+                <div class="dish-info">
+                  <p class="dish-name">${item.dish.name}</p>
+                  <p>¥${item.dish.price || 12}</p>
                 </div>
-              `;
-              break;
-            case 'img':
-              html = `
-                <div class="msg-item-content triangle ${side}"><img class="msg-img" src="${msg.data}"/></div>
-              `;
-            default:
-          }
-          return html;
-        },
-        send(msg) {
-          this.run('renderItem', msg, 'right');
-          // send msg
-          this.run('onRecvMsg', '机器人自动回复：' + Math.random().toFixed(2) * 100);
-        },
-      }).init();
+                <span class="my-badge">${item.count}</span>
+              ` : ''}
+            </li>
+        `).join('')}
+      </ul>
+    `;
+  }).join('');
+}
+new Chat({
+  el: '.phone',
+  title: '聊天',
+  placeholder: '你说，我听',
+  afterRender() {
+    this.run('onRecvMsg', '你好， 很高兴认识你');
+    this.run('onRecvMsg', {
+      type: 'cart',
+      data: cartData
+    })
+    this.run('onRecvMsg', {
+      type: 'img',
+      data: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536566141823&di=7f254a1f5cc22a8ffaa00dc9b53f2ed4&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201411%2F30%2F20141130052353_i4ekh.thumb.700_0.jpeg'
+    })
+  },
+  makeItemHtml(msg, side) {
+    if (typeof msg === 'string' || msg.html) {
+      return `
+        <div class="msg-item-content triangle ${side}">${msg.html || this.escape(msg)}</div>
+      `;
+    }
+    let html = '';
+    switch (msg.type) {
+      case 'cart':
+        html = `
+          <div class="msg-cart">
+            ${renderDishes(msg.data.dishesList)}
+          </div>
+        `;
+        break;
+      case 'img':
+        html = `
+          <div class="msg-item-content triangle ${side}"><img class="msg-img" src="${msg.data}"/></div>
+        `;
+      default:
+    }
+    return html;
+  },
+  send(msg) {
+    this.run('renderItem', msg, 'right');
+    // send msg
+    this.run('onRecvMsg', '机器人自动回复：' + Math.random().toFixed(2) * 100);
+  },
+}).init();
   </script>
 </body>
 
