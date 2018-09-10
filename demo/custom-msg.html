@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>聊天</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .phone {
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    @media screen and (min-width: 800px) {
+      .phone {
+        width: 368px;
+        height: 741px;
+        background-image: url(./iphone.png);
+        background-size: cover;
+        padding: 83px 24px 105px;
+      }
+      .phone::before {
+        content: "";
+        display: block;
+        height: 10px;
+        background-color: #05c1ae;
+        background-image: url(./ios-statusbar.png);
+        background-size: contain;
+        padding: 5px 0 0;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    .headimg {
+      float: left;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      margin-top: 12px;
+    }
+    .msg-item.right .headimg {
+      float: right;
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="phone">
+
+  </div>
+  <script src="../dist/chat_js.min.js"></script>
+  <script>
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+          month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+          + " " + date.getHours() + seperator2 + date.getMinutes()
+          + seperator2 + date.getSeconds();
+        return currentdate;
+      }
+      new Chat({
+        el: '.phone',
+        title: '聊天',
+        placeholder: '你说，我听',
+        afterRender() {
+          this.run('onRecvMsg', '你好， 很高兴认识你');
+        },
+        renderHeader() {
+          return '';
+        },
+        makeItemHtml(msg, side) {
+          const headImgs = {
+            left: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536566141823&di=7f254a1f5cc22a8ffaa00dc9b53f2ed4&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201411%2F30%2F20141130052353_i4ekh.thumb.700_0.jpeg',
+            right: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536565397585&di=d6f5834fdfa214ca266b7a93d7a480af&imgtype=0&src=http%3A%2F%2Fcdnq.duitang.com%2Fuploads%2Fitem%2F201309%2F26%2F20130926095128_SiPMh.jpeg',
+          }
+          return `
+            <img class="headimg" src="${headImgs[side]}" />
+            <p>${getNowFormatDate()}</p>
+            <div class="msg-item-content triangle ${side}">${msg.html || this.escape(msg)}</div>
+          `;
+        },
+        send(msg) {
+          this.run('renderItem', msg, 'right');
+          // send msg
+          this.run('onRecvMsg', '机器人自动回复：' + Math.random().toFixed(2) * 100);
+        },
+      }).init();
+  </script>
+</body>
+
+</html>

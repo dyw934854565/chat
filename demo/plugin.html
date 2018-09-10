@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>聊天</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .phone {
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    @media screen and (min-width: 800px) {
+      .phone {
+        width: 368px;
+        height: 741px;
+        background-image: url(./iphone.png);
+        background-size: cover;
+        padding: 83px 24px 105px;
+      }
+      .phone::before {
+        content: "";
+        display: block;
+        height: 10px;
+        background-color: #05c1ae;
+        background-image: url(./ios-statusbar.png);
+        background-size: contain;
+        padding: 5px 0 0;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .cart-btn {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      line-height: 34px;
+      text-align: center;
+      bottom: 58px;
+      right: 6px;
+      border: solid 1px #999;
+      color: #333;
+      background-color: #fff;
+      border-radius: 50%;
+      z-index: 2;
+    }
+    .cart-btn .badge {
+      position: absolute;
+      top: -8px;
+      right: -6px;
+      color: #fff;
+      background: red;
+      display: inline-block;
+      min-width: 10px;
+      padding: 3px 7px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      border-radius: 10px;
+    }
+    .icon-gouwuche {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: url(./gouwuche.png);
+      background-size: 22px 22px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="phone">
+
+  </div>
+  <script src="../dist/chat_js.min.js"></script>
+  <script>
+    new Chat({
+      el: '.phone',
+      title: '聊天',
+      afterRender() {
+        const cart = document.createElement('div')
+        cart.innerHTML = `
+          <div class="cart-btn op">
+            <i class="icon iconfont icon-gouwuche"></i>
+            <span class="badge">4</span>
+          </div>
+        `
+        document.querySelector('.chat-plugins').appendChild(cart)
+        this.run('onRecvMsg', '你好， 很高兴认识你');
+      },
+      send(msg) {
+        this.run('renderItem', msg, 'right');
+        // send msg
+        this.run('onRecvMsg', '机器人自动回复：' + Math.random().toFixed(2) * 100);
+      },
+    }).init();
+  </script>
+</body>
+
+</html>

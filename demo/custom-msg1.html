@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>聊天</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .phone {
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    @media screen and (min-width: 800px) {
+      .phone {
+        width: 368px;
+        height: 741px;
+        background-image: url(./iphone.png);
+        background-size: cover;
+        padding: 83px 24px 105px;
+      }
+      .phone::before {
+        content: "";
+        display: block;
+        height: 10px;
+        background-color: #05c1ae;
+        background-image: url(./ios-statusbar.png);
+        background-size: contain;
+        padding: 5px 0 0;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    .msg-cart p,
+    .recommendation p {
+      margin: 0 -10px;
+      line-height: 14px;
+      -webkit-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+      -moz-transform: scale(0.8);
+      transform: scale(0.8);
+      -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+      -moz-transform-origin: center;
+      transform-origin: center;
+      white-space: nowrap;
+    }
+    .msg-cart .dish-info,
+    .recommendation .dish-info {
+      padding: 0;
+    }
+
+    .dish .my-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #fff;
+      z-index: 1;
+    }
+    .dish .my-badge::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: rgba(255, 0, 0, 0.6);
+      top: -15px;
+      right: -15px;
+      z-index: -1;
+      transform: rotate(45deg);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .dish {
+      position: relative;
+      float: left;
+      width: 25%;
+      box-shadow: #ddd 1px 1px 4px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .dish-info {
+      text-align: center;
+      padding: 6px 0px;
+    }
+    .dish-img {
+      height: 54px;
+      background-size: cover;
+      background-position: center;
+    }
+    .clearfix::after {
+      content: "";
+      display: table;
+      width: 100%;
+    }
+    .msg-img {
+      max-width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="phone">
+
+  </div>
+  <script src="../dist/chat_js.min.js"></script>
+  <script>
+    const cartData = {
+        "numPeople": 3,
+        "avgPrice": 36,
+        "totalPrice": 108,
+        "dishesList": [
+          {
+            "dish": {
+              "weekLikeCnt": "0",
+              "complexity": "普通",
+              "chineseCuisine": "川菜",
+              "cost": "十分钟",
+              "method": "炒",
+              "taste": "鱼香",
+              "description": "菜色红润、肉嫩、质鲜、富鱼香味",
+              "orderCnt": "283",
+              "calories": 156,
+              "scenery": "家常菜",
+              "picture": "http://p1.meituan.net/xianfudwm/a4d9be9600bed21497a8c5a667cb8786135544.jpg",
+              "likeCnt": "8",
+              "dishCate": "荤菜",
+              "materials": "猪肉",
+              "price": 32,
+              "person": "老人",
+              "dishType": "热菜",
+              "effect": "活血化瘀",
+              "name": "鱼香肉丝",
+              "ingredients": "青椒",
+              "poiId": "325856",
+              "id": "117016836",
+              "meatOrVeg": "荤"
+            },
+            "count": 1
+          },
+          {
+            "dish": {
+              "complexity": "普通",
+              "weekLikeCnt": "3",
+              "chineseCuisine": "川菜",
+              "cost": "半小时",
+              "method": "炒",
+              "taste": "酸甜",
+              "description": "甜中有辣，辣中有甜，入口鲜辣酥香，红而不辣，辣而不猛，肉质滑脆，（鸡肉使用鸡腿肉，带鸡皮，介意者勿点，禁止差评）",
+              "orderCnt": "545",
+              "calories": 170,
+              "scenery": "家常菜",
+              "picture": "http://p1.meituan.net/xianfuwm/63fef70910ff8b8982c0d34b40ba853b75776.jpg",
+              "likeCnt": "12",
+              "dishCate": "荤菜",
+              "materials": "鸡肉",
+              "price": 18,
+              "dishType": "热菜",
+              "effect": "增强体质",
+              "name": "小宫保鸡丁",
+              "ingredients": [
+                "花生",
+                "辣椒",
+                "葱"
+              ],
+              "season": "冬季",
+              "poiId": "325856",
+              "id": "117016801",
+              "meatOrVeg": "荤"
+            },
+            "count": 1
+          },
+          {
+            "dish": {
+              "complexity": "高级",
+              "weekLikeCnt": "5",
+              "chineseCuisine": "川菜",
+              "cost": "半小时",
+              "method": "煮",
+              "taste": "麻辣",
+              "description": "正宗四川风味，麻辣的过瘾。满足您的味蕾刺激",
+              "orderCnt": "148",
+              "calories": 85,
+              "scenery": "中式宴请",
+              "picture": "http://p1.meituan.net/xianfu/76f3725e7b0075f6d1d91566efc9f839364544.jpg",
+              "likeCnt": "7",
+              "dishCate": "荤菜",
+              "materials": "鸭血",
+              "price": 58,
+              "dishType": "热菜",
+              "effect": "补血",
+              "name": "重庆毛血旺",
+              "season": "冬季",
+              "ingredients": "豆芽",
+              "poiId": "325856",
+              "id": "117016843",
+              "meatOrVeg": "荤"
+            },
+            "count": 1
+          }
+        ],
+        "distributionList": [
+          {
+            "dimName": "材料",
+            "dimKey": "materials",
+            "distributionValues": {
+              "鸭血": 1,
+              "猪肉": 1,
+              "鸡肉": 1
+            }
+          },
+          {
+            "dimName": "冷热",
+            "dimKey": "dishType",
+            "distributionValues": {
+              "热菜": 3
+            }
+          },
+          {
+            "dimName": "口味",
+            "dimKey": "taste",
+            "distributionValues": {
+              "酸甜": 1,
+              "麻辣": 1,
+              "鱼香": 1
+            }
+          },
+          {
+            "dimName": "荤素",
+            "dimKey": "meatOrVeg",
+            "distributionValues": {
+              "荤": 3
+            }
+          }
+        ]
+      };
+  </script>
+  <script>
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+          month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+          + " " + date.getHours() + seperator2 + date.getMinutes()
+          + seperator2 + date.getSeconds();
+        return currentdate;
+      }
+      function renderDishes(dishes, colCount = 4) {
+        return Array.from({ length: Math.ceil(dishes.length / colCount) }).map((val, index) => {
+          const items = Array.from({ length: colCount }).map((val, i) => dishes[index * colCount + i]);
+          return `
+            <ul class="clearfix">
+              ${items.map(item => `
+                  <li class="dish">
+                    ${item ? `
+                      <div class="dish-img" style="background-image: url(${item.dish.picture || defaultImg});"></div>
+                      <div class="dish-info">
+                        <p class="dish-name">${item.dish.name}</p>
+                        <p>¥${item.dish.price || 12}</p>
+                      </div>
+                      <span class="my-badge">${item.count}</span>
+                    ` : ''}
+                  </li>
+              `).join('')}
+            </ul>
+          `;
+        }).join('');
+      }
+      new Chat({
+        el: '.phone',
+        title: '聊天',
+        placeholder: '你说，我听',
+        afterRender() {
+          this.run('onRecvMsg', '你好， 很高兴认识你');
+          this.run('onRecvMsg', {
+            type: 'cart',
+            data: cartData
+          })
+          this.run('onRecvMsg', {
+            type: 'img',
+            data: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536566141823&di=7f254a1f5cc22a8ffaa00dc9b53f2ed4&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201411%2F30%2F20141130052353_i4ekh.thumb.700_0.jpeg'
+          })
+        },
+        makeItemHtml(msg, side) {
+          if (typeof msg === 'string' || msg.html) {
+            return `
+              <p>${getNowFormatDate()}</p>
+              <div class="msg-item-content triangle ${side}">${msg.html || this.escape(msg)}</div>
+            `;
+          }
+          let html = '';
+          switch (msg.type) {
+            case 'cart':
+              html = `
+                <div class="msg-cart">
+                  ${renderDishes(msg.data.dishesList)}
+                </div>
+              `;
+              break;
+            case 'img':
+              html = `
+                <div class="msg-item-content triangle ${side}"><img class="msg-img" src="${msg.data}"/></div>
+              `;
+            default:
+          }
+          return html;
+        },
+        send(msg) {
+          this.run('renderItem', msg, 'right');
+          // send msg
+          this.run('onRecvMsg', '机器人自动回复：' + Math.random().toFixed(2) * 100);
+        },
+      }).init();
+  </script>
+</body>
+
+</html>
