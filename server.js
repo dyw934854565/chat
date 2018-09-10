@@ -5,8 +5,8 @@ var app = express();
 
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 8422 });
-console.log("websocket start on port 8422");
+const wss = new WebSocket.Server({ port: 8424 });
+console.log("websocket start on port 8424");
 wss.on('connection', function connection(ws) {
   let t;
   ws.on('message', function incoming(message) {
