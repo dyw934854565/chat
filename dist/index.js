@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 52);
+/******/ 	return __webpack_require__(__webpack_require__.s = 50);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -637,70 +637,6 @@ module.exports = function (it) {
 
 /***/ }),
 /* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(39);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(41)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {
-	module.hot.accept("!!../node_modules/css-loader/index.js!./index.css", function() {
-		var newContent = require("!!../node_modules/css-loader/index.js!./index.css");
-
-		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-
-		var locals = (function(a, b) {
-			var key, idx = 0;
-
-			for(key in a) {
-				if(!b || a[key] !== b[key]) return false;
-				idx++;
-			}
-
-			for(key in b) idx--;
-
-			return idx === 0;
-		}(content.locals, newContent.locals));
-
-		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
-
-		update(newContent);
-	});
-
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(40)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".chat {\n  position: relative;\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n}\n\n.chat .chat-header {\n  height: 40px;\n  line-height: 40px;\n  background: #05c1ae;\n  text-align: center;\n}\n\n.chat .chat-content {\n  position: absolute;\n  top: 40px;\n  bottom: 40px;\n  left: 0;\n  right: 0;\n  overflow-x: hidden;\n  overflow-y: auto;\n  background: #eee;\n  font-size: 12px;\n}\n\n.chat .chat-footer {\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  bottom: 0;\n  border-top: solid 1px #ccc;\n  padding: 4px;\n  box-sizing: border-box;\n  background: #fff;\n}\n.chat .chat-footer table {\n  width: 100%;\n  height: 100%;\n  border-spacing: 0;\n  border-collapse: collapse;\n}\n.chat .chat-footer .chat-input {\n  height: 100%;\n  width: 100%;\n  outline: none;\n  border: none;\n  padding: 0 4px;\n  box-sizing: border-box;\n  border-bottom: solid 1px #ccc;\n}\n\n.chat .chat-footer .chat-input:focus {\n  border-bottom: solid 1px #05c1ae;\n}\n\n.msg-item {\n  padding: 10px 20px;\n}\n\n.msg-item.left {\n  text-align: left;\n}\n\n.msg-item.right {\n  text-align: right;\n}\n\n.msg-item-content {\n  text-align: left;\n  display: inline-block;\n  max-width: 76%;\n  padding: 6px 8px;\n  border-radius: 6px;\n  box-sizing: border-box;\n  white-space: pre-line;\n  word-break: break-word;\n}\n\n.msg-item-content.left {\n  background: #fff;\n  color: #333;\n}\n\n.msg-item-content.right {\n  background: #05c1ae;\n  color: #fff;\n}\n\n.triangle {\n  position: relative;\n  z-index: 1;\n}\n\n.triangle::after {\n  position: absolute;\n  display: inline-block;\n  content: \"\";\n  width: 8px;\n  height: 8px;\n  border-style: solid;\n  border: none;\n  border-radius: 2px;\n  -webkit-transform: skew(59deg, -31deg);\n  -moz-transform: skew(59deg, -31deg);\n  -ms-transform: skew(59deg, -31deg);\n  transform: skew(59deg, -31deg);\n  z-index: -1;\n}\n\n.triangle.left:after {\n  background: #fff;\n  left: 0px;\n  top: 11px;\n}\n\n.triangle.right:after {\n  background: #05c1ae;\n  right: 0px;\n  top: 8px;\n}\n\n.send-btn {\n  white-space: nowrap;\n  background: #05c1ae;\n  border-color: #05c1ae;\n  color: #fff;\n  border-radius: 6px;\n  outline: none;\n}\n\n.send-btn:focus {\n  border-color: #05cfae;\n  background: #05cfae;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 40 */
 /***/ (function(module, exports) {
 
 /*
@@ -782,7 +718,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -848,7 +784,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(42);
+var	fixUrls = __webpack_require__(40);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1168,7 +1104,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, exports) {
 
 
@@ -1263,7 +1199,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 43 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1301,15 +1237,15 @@ module.exports = function(str) {
 
 
 /***/ }),
+/* 42 */,
+/* 43 */,
 /* 44 */,
 /* 45 */,
 /* 46 */,
 /* 47 */,
 /* 48 */,
 /* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1319,16 +1255,15 @@ var _assign = __webpack_require__(10);
 
 var _assign2 = _interopRequireDefault(_assign);
 
-var _classCallCheck2 = __webpack_require__(53);
+var _classCallCheck2 = __webpack_require__(51);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(38);
-var _escape = __webpack_require__(43);
+__webpack_require__(52);
+var _escape = __webpack_require__(41);
 var defaultOpts = {
-  headerHeight: 40,
   el: document.body,
   input: ".chat-input",
   sendBtn: ".send-btn",
@@ -1342,7 +1277,7 @@ var defaultOpts = {
     return el;
   },
   renderHeader: function renderHeader() {
-    return this.run("title");
+    return "<h1 class=\"chat-title\">" + this.run("title") + "</h1>";
   },
   renderFooter: function renderFooter() {
     return "\n      <table>\n        <tr>\n          <td style=\"width: 100%;\"><input class=\"chat-input\" placeholder=\"" + this.run("placeholder") + "\" autocomplete=\"off\" autofocus=\"on\"></input></td>\n          <td><button class=\"send-btn\">\u53D1\u9001</button></td>\n        </tr>\n      </table>\n    ";
@@ -1361,7 +1296,7 @@ var defaultOpts = {
     this.body.appendChild(msgEl);
   },
   render: function render(msgs) {
-    this.run("getElement", "el").innerHTML = "\n      <div class=\"chat\">\n        <div class=\"chat-header\">\n          " + this.run("renderHeader") + "\n        </div>\n        <div class=\"chat-content\">\n        </div>\n        <div class=\"chat-footer\">\n          " + this.run("renderFooter") + "\n        </div>\n      <div>\n    ";
+    this.run("getElement", "el").innerHTML = "\n      <div class=\"chat\">\n        <div class=\"chat-header\">\n          " + this.run("renderHeader") + "\n        </div>\n        <div class=\"chat-content\">\n        </div>\n        <div class=\"chat-footer\">\n          " + this.run("renderFooter") + "\n        </div>\n        <div class=\"chat-plugins\"></div>\n      </div>\n    ";
   },
   addEventListener: function addEventListener(el, name, fn) {
     el.addEventListener(name, fn, false);
@@ -1449,7 +1384,7 @@ var Chat = function () {
 module.exports = Chat;
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1462,6 +1397,70 @@ exports.default = function (instance, Constructor) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(53);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(39)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/src/index.js!./index.flex.css", function() {
+		var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/src/index.js!./index.flex.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(38)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".chat{-moz-box-direction:normal;-moz-box-orient:vertical;-ms-flex-direction:column;-webkit-box-direction:normal;-webkit-box-orient:vertical;-webkit-flex-direction:column;display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;flex-direction:column;height:100%;overflow:hidden;position:relative;width:100%}.chat .chat-header{text-align:center}.chat .chat-header .chat-title{background:#05c1ae;color:#fff;font-size:16px;height:40px;line-height:40px;margin:0}.chat .chat-content{-moz-box-flex:1;-ms-flex:1;-webkit-box-flex:1;-webkit-flex:1;background:#eee;flex:1;font-size:12px;overflow-x:hidden;overflow-y:auto}.chat .chat-footer{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;background:#fff;border-top:1px solid #ccc;box-sizing:border-box;padding:2px;width:100%}.chat .chat-footer table{border-collapse:collapse;border-spacing:0;height:40px;width:100%}.chat .chat-footer .chat-input{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;border:none;border-bottom:1px solid #ccc;box-sizing:border-box;height:100%;outline:none;padding:0 4px;width:100%}.chat .chat-footer .chat-input:focus{border-bottom:1px solid #05c1ae}.msg-item{padding:10px 20px}.msg-item.left{text-align:left}.msg-item.right{text-align:right}.msg-item-content{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;border-radius:6px;box-sizing:border-box;display:inline-block;max-width:76%;padding:6px 8px;text-align:left;white-space:pre-line;word-break:break-word}.msg-item-content.left{background:#fff;color:#333}.msg-item-content.right{background:#05c1ae;color:#fff}.triangle{position:relative;z-index:1}.triangle:after{-ms-transform:skew(59deg,-31deg);-webkit-transform:skew(59deg,-31deg);border:none;border-radius:2px;content:\"\";display:inline-block;height:8px;position:absolute;transform:skew(59deg,-31deg);width:8px;z-index:-1}.triangle.left:after{background:#fff;left:0;top:11px}.triangle.right:after{background:#05c1ae;right:0;top:8px}.send-btn{background:#05c1ae;border-color:#05c1ae;border-radius:6px;color:#fff;outline:none;white-space:nowrap}.send-btn:focus{background:#05cfae;border-color:#05cfae}", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

@@ -2,7 +2,7 @@
   <div class="chat">
     <div class="chat-header" v-if="mergedConfig.showHeader">
       <slot name="header">
-        {{mergedConfig.title}}
+        <h1 class="chat-title">{{mergedConfig.title}}</h1>
       </slot>
     </div>
     <scroll-view @scroll="scroll" :style="style" class="chat-content" :enable-back-to-top="true" :scroll-y="true" :scroll-into-view="lastId">
@@ -22,11 +22,15 @@
         </table>
       </slot>
     </div>
+    <div class="chat-plugins">
+      <slot name="plugins">
+      </slot>
+    </div>
   </div>
 </template>
 
 <script>
-  import '../index.css'
+  import '../index.flex.css'
   import dialogItem from './dialog-item.vue'
   const defaultConfig = {
     title: '聊天',

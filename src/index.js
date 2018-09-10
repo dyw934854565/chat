@@ -1,7 +1,6 @@
-require('./index.css');
+require('./index.flex.css');
 const escape = require("html-escape");
 const defaultOpts = {
-  headerHeight: 40,
   el: document.body,
   input: ".chat-input",
   sendBtn: ".send-btn",
@@ -15,7 +14,7 @@ const defaultOpts = {
     return el;
   },
   renderHeader() {
-    return this.run("title");
+    return `<h1 class="chat-title">${this.run("title")}</h1>`;
   },
   renderFooter() {
     return `
@@ -55,7 +54,8 @@ const defaultOpts = {
         <div class="chat-footer">
           ${this.run("renderFooter")}
         </div>
-      <div>
+        <div class="chat-plugins"></div>
+      </div>
     `;
   },
   addEventListener(el, name, fn) {
