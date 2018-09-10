@@ -305,7 +305,6 @@
         makeItemHtml(msg, side) {
           if (typeof msg === 'string' || msg.html) {
             return `
-              <p>${getNowFormatDate()}</p>
               <div class="msg-item-content triangle ${side}">${msg.html || this.escape(msg)}</div>
             `;
           }
