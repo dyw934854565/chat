@@ -100,6 +100,9 @@
         })
       },
       scrollTo (index, nextTick = true) {
+        if (index < 0) {
+          index = this.messageList.length + index
+        }
         if (typeof index !== 'number' || !this.messageList[index]) {
           return
         }
@@ -115,8 +118,6 @@
         this.scrollToBottom(false)
       },
       scroll () {
-        console.log('scroll')
-
         this.lastId = ''
       }
     },
