@@ -5,8 +5,8 @@ var app = express();
 
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 8080 });
-console.log("websocket start on port 8080");
+const wss = new WebSocket.Server({ port: 8422 });
+console.log("websocket start on port 8422");
 wss.on('connection', function connection(ws) {
   let t;
   ws.on('message', function incoming(message) {
@@ -27,6 +27,6 @@ wss.on('connection', function connection(ws) {
 
 
 app.use(express.static(__dirname));
-console.log('server start on port 3000');
-console.log('open: ' + 'http://localhost:3000/demo');
-app.listen(3000);
+console.log('server start on port 8423');
+console.log("open: " + "http://localhost:8423/demo");
+app.listen(8423);
