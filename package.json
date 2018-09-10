@@ -1,6 +1,6 @@
 {
   "name": "chat-box-js",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "component to make chat box ",
   "main": "dist/chat_js.js",
   "scripts": {
