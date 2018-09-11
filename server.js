@@ -7,8 +7,7 @@ const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({
   port: 8424,
-  path: "/ws",
-  host: "sange.ai.dev.meituan.com"
+  path: "/ws"
 });
 console.log("websocket start on port 8424");
 wss.on('connection', function connection(ws) {
