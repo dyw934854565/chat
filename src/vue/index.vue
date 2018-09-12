@@ -5,11 +5,19 @@
         <h1 class="chat-title">{{mergedConfig.title}}</h1>
       </slot>
     </div>
+    <div class="chat-header-plugin">
+      <slot name="header-plugin">
+      </slot>
+    </div>
     <scroll-view @scroll="scroll" :style="style" class="chat-content" :enable-back-to-top="true" :scroll-y="true" :scroll-into-view="lastId">
       <slot>
         <component :index="index" :id="'dialog_' + index" v-for="(message, index) in messageList" :key="index" :is="message.component || 'dialog-item'" :side="message.side" :data="message.data"></component>
       </slot>
     </scroll-view>
+    <div class="chat-footer-plugin">
+      <slot name="footer-plugin">
+      </slot>
+    </div>
     <div class="chat-footer">
       <slot name="footer">
         <table>

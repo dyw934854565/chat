@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>聊天</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .phone {
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    @media screen and (min-width: 800px) {
+      .phone {
+        width: 368px;
+        height: 741px;
+        background-image: url(./iphone.png);
+        background-size: cover;
+        padding: 83px 24px 105px;
+      }
+      .phone::before {
+        content: "";
+        display: block;
+        height: 10px;
+        background-color: #05c1ae;
+        background-image: url(./ios-statusbar.png);
+        background-size: contain;
+        padding: 5px 0 0;
+        background-position: bottom;
+        background-repeat: no-repeat;
+      }
+    }
+    @keyframes marquee {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+      to {
+        transform: translate3d(-100%, 0, 0);
+      }
+    }
+    .plugin-marquee {
+      background: #66CCCC;
+    }
+    .plugin-marquee p {
+      margin: 0;
+      line-height: 20px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      animation: marquee 8s linear 2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="phone">
+
+  </div>
+  <script src="../dist/chat_js.min.js"></script>
+  <script>
+    new Chat({
+      el: '.phone',
+      title: '聊天',
+      afterRender() {
+        this.run('onRecvMsg', '你好， 很高兴认识你');
+        this.run('addHeaderPlugin');
+      },
+      addHeaderPlugin() {
+        const cart = document.createElement('div');
+        cart.className = 'plugin-marquee';
+        cart.innerHTML = `
+          <p>你还可以对我说，老年人适合喝什么牛奶.test more and more and more and more</p>
+        `
+        document.querySelector('.chat-header-plugin').appendChild(cart)
+        setTimeout(() => {
+          cart.remove();
+          this.run('addFooterPlugin');
+        }, 16000);
+      },
+      addFooterPlugin() {
+        const marquee = document.createElement('div');
+        marquee.className = 'plugin-marquee';
+        marquee.innerHTML = `
+          <p>你还可以对我说，老年人适合喝什么牛奶.test more and more and more and more</p>
+        `
+        document.querySelector('.chat-footer-plugin').appendChild(marquee)
+        setTimeout(() => {
+          marquee.remove();
+        }, 16000);
+      },
+      send(msg) {
+        this.run('renderItem', msg, 'right');
+        // send msg
+        this.run('onRecvMsg', '机器人自动回复：' + Math.random().toFixed(2) * 100);
+      },
+    }).init();
+  </script>
+</body>
+
+</html>

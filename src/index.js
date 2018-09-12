@@ -49,8 +49,10 @@ const defaultOpts = {
         <div class="chat-header">
           ${this.run("renderHeader")}
         </div>
+        <div class="chat-header-plugin"></div>
         <div class="chat-content">
         </div>
+        <div class="chat-footer-plugin"></div>
         <div class="chat-footer">
           ${this.run("renderFooter")}
         </div>

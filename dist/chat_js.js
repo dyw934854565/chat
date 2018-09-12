@@ -1360,7 +1360,7 @@ var defaultOpts = {
     this.body.appendChild(msgEl);
   },
   render: function render(msgs) {
-    this.run("getElement", "el").innerHTML = "\n      <div class=\"chat\">\n        <div class=\"chat-header\">\n          " + this.run("renderHeader") + "\n        </div>\n        <div class=\"chat-content\">\n        </div>\n        <div class=\"chat-footer\">\n          " + this.run("renderFooter") + "\n        </div>\n        <div class=\"chat-plugins\"></div>\n      </div>\n    ";
+    this.run("getElement", "el").innerHTML = "\n      <div class=\"chat\">\n        <div class=\"chat-header\">\n          " + this.run("renderHeader") + "\n        </div>\n        <div class=\"chat-header-plugin\"></div>\n        <div class=\"chat-content\">\n        </div>\n        <div class=\"chat-footer-plugin\"></div>\n        <div class=\"chat-footer\">\n          " + this.run("renderFooter") + "\n        </div>\n        <div class=\"chat-plugins\"></div>\n      </div>\n    ";
   },
   addEventListener: function addEventListener(el, name, fn) {
     el.addEventListener(name, fn, false);
