@@ -34,13 +34,14 @@ const defaultOpts = {
   },
   makeItemHtml(msg, side) {
     return `
-        <div class="msg-item-content triangle ${side}">${msg.html || this.escape(msg)}</div>
+        <div class="msg-item-content triangle ${side}">${msg.html ||
+      this.escape(msg)}</div>
     `;
   },
   renderItem(msg, side) {
     const msgEl = document.createElement("div");
     msgEl.className = `msg-item ${side}`;
-    msgEl.innerHTML = this.run('makeItemHtml', msg, side);
+    msgEl.innerHTML = this.run("makeItemHtml", msg, side);
     this.body.appendChild(msgEl);
   },
   render(msgs) {
@@ -89,6 +90,10 @@ const defaultOpts = {
     const body = el || this.body;
     body.scrollTop = body.scrollHeight;
   },
+  scrollToTop(el) {
+    const body = el || this.body;
+    body.scrollTop = 0;
+  }
 };
 class Chat {
   constructor (opts = {}) {

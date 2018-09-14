@@ -1356,7 +1356,7 @@ var defaultOpts = {
   renderItem: function renderItem(msg, side) {
     var msgEl = document.createElement("div");
     msgEl.className = "msg-item " + side;
-    msgEl.innerHTML = this.run('makeItemHtml', msg, side);
+    msgEl.innerHTML = this.run("makeItemHtml", msg, side);
     this.body.appendChild(msgEl);
   },
   render: function render(msgs) {
@@ -1392,6 +1392,10 @@ var defaultOpts = {
   scrollToBottom: function scrollToBottom(el) {
     var body = el || this.body;
     body.scrollTop = body.scrollHeight;
+  },
+  scrollToTop: function scrollToTop(el) {
+    var body = el || this.body;
+    body.scrollTop = 0;
   }
 };
 
