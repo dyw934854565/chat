@@ -99,13 +99,10 @@
         this.msgChange()
       },
       scrollToBottom (nextTick = true) {
-        if (!nextTick) {
-          this.lastId = `dialog_${this.messageList.length - 1}`
-          return
-        }
-        this.$nextTick(() => {
-          this.lastId = `dialog_${this.messageList.length - 1}`
-        })
+        this.scrollTo(this.messageList.length - 1, nextTick)
+      },
+      scrollToTop (nextTick = true) {
+        this.scrollTo(0, nextTick)
       },
       scrollTo (index, nextTick = true) {
         if (index < 0) {
