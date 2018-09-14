@@ -6,7 +6,7 @@
       </slot>
     </div>
     <div class="chat-header-plugin">
-      <slot name="header-plugin">
+      <slot name="headerplugin">
       </slot>
     </div>
     <scroll-view @scroll="scroll" :style="style" class="chat-content" :enable-back-to-top="true" :scroll-y="true" :scroll-into-view="lastId">
@@ -15,7 +15,7 @@
       </slot>
     </scroll-view>
     <div class="chat-footer-plugin">
-      <slot name="footer-plugin">
+      <slot name="footerplugin">
       </slot>
     </div>
     <div class="chat-footer">
